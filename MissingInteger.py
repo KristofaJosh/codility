@@ -19,23 +19,26 @@ N is an integer within the range [1..100,000];
 each element of array A is an integer within the range [−1,000,000..1,000,000].
 """
 
+
 def solution(A):
-    Arr = list(set(A))
-    print(Arr)
+    A = set(A)
+    B = {x for x in range(1, max(A) + 1)}
 
-    for i, value in enumerate(Arr):
-        print(Arr[0], i, value)
-        if Arr[0] == 0:
-            Arr.pop(0)
-        if Arr[0] != 1:
-            return 1
-        if Arr[0] + i != value:
-            ans = value - 1 if value > 0 else 1
-            return ans
-    return max(Arr) + 1
+    # only positive numbers check
+    if all(i < 0 for i in A):
+        return 1
 
-# print(solution([1,2,3,4,6]))
+    # check if list are equal, return len + 1
+    elif A == B:
+        return len(A) + 1
+    else:
+        return min(list(B - A)) if list(B - A) else 1
 
 
-# print(solution([x for x in range(101)].extend([x for x in range(102, 200)])))
+print(solution([0]))
 
+print(solution([1, 3, 6, 8, 4, 1, 2]))
+#
+# print(solution([1, 2, 3]))
+#
+# print(solution([-1, -2, -3]))
